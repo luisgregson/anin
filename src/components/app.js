@@ -3,29 +3,32 @@ import { Router } from 'preact-router';
 
 import Header from './header';
 import Home from '../routes/home';
-import Profile from '../routes/profile';
-// import Home from 'async!../routes/home';
-// import Profile from 'async!../routes/profile';
+import About from '../routes/about';
+import Gigs from '../routes/gigs';
+import Contact from '../routes/contact';
 
 export default class App extends Component {
-	/** Gets fired when the route changes.
-	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
-	 *	@param {string} event.url	The newly routed URL
-	 */
-	handleRoute = e => {
-		this.currentUrl = e.url;
-	};
+  links = [ 'about', 'gigs', 'contact', 'test'];
 
-	render() {
-		return (
-			<div id="app">
-				<Header />
-				<Router onChange={this.handleRoute}>
-					<Home path="/" />
-					<Profile path="/profile/" user="me" />
-					<Profile path="/profile/:user" />
-				</Router>
-			</div>
-		);
-	}
+  /** Gets fired when the route changes.
+  *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
+  *	@param {string} event.url	The newly routed URL
+  */
+  handleRoute = e => {
+    this.currentUrl = e.url;
+  };
+
+  render() {
+    return (
+      <div id="app">
+        <Header links={this.links} />
+        <Router onChange={this.handleRoute}>
+          <Home path="/" />
+          <About path="/about" />
+          <Gigs path="/gigs" />
+          <Contact path="/contact" />
+        </Router>
+      </div>
+    );
+  }
 }

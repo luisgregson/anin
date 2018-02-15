@@ -1,5 +1,7 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
+import 'preact/devtools';
+import * as fp from 'lodash/fp';
 
 import Header from './header';
 import Home from '../routes/home';
@@ -8,7 +10,7 @@ import Gigs from '../routes/gigs';
 import Contact from '../routes/contact';
 
 export default class App extends Component {
-  links = [ 'about', 'gigs', 'contact', 'test'];
+  slugs = ['', 'about', 'gigs', 'contact'];
 
   /** Gets fired when the route changes.
   *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
@@ -18,10 +20,15 @@ export default class App extends Component {
     this.currentUrl = e.url;
   };
 
+  constructor () {
+    super();
+    window.fp = fp;
+  }
+
   render() {
     return (
       <div id="app">
-        <Header links={this.links} />
+        <Header slugs={this.slugs} />
         <Router onChange={this.handleRoute}>
           <Home path="/" />
           <About path="/about" />

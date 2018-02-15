@@ -2,15 +2,21 @@ import { h, Component } from 'preact';
 import { Link } from 'preact-router/match';
 import PropTypes from 'prop-types';
 import style from './style';
-import { map, upperFirst, words } from 'lodash';
+import { flow, join, map, upperFirst, words } from 'lodash/fp';
+
+const upperFirstSpacedWords = flow(words, map(upperFirst), join(' '));
+const mapWithIndex = map.convert({ cap: false });
 
 export default class Header extends Component {
-  linkList = this.props.links.map((link, index) =>
-    (
-      <Link key={index} activeClassName={style.active} href={`/${link}`}>
-        {map(words(link), upperFirst)}
-      </Link>
-    )
+  links = mapWithIndex(
+    (slug, index) => (
+      <Link key={`${index}${slug}`}
+        activeClassName={style.active}
+        children={slug === '' ? 'Home' : upperFirstSpacedWords(slug)}
+        href={`/${slug}`}
+      />
+    ),
+    this.props.slugs
   );
 
   render() {
@@ -18,8 +24,7 @@ export default class Header extends Component {
       <header class={style.header}>
         <h1>A Night In November</h1>
         <nav>
-          <Link activeClassName={style.active} href="/">Home</Link>
-          {this.linkList}
+          {this.links}
         </nav>
       </header>
     );
@@ -27,7 +32,7 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.string)
+  slugs: PropTypes.arrayOf(PropTypes.string)
 };
 
 Header.defaultProps = {

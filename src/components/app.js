@@ -4,10 +4,10 @@ import 'preact/devtools';
 import * as fp from 'lodash/fp';
 
 import Header from './header';
-import Home from '../routes/home';
-import About from '../routes/about';
-import Gigs from '../routes/gigs';
-import Contact from '../routes/contact';
+import Home from 'routes/home';
+import About from 'routes/about';
+import Gigs from 'routes/gigs';
+import Contact from 'routes/contact';
 
 export default class App extends Component {
   slugs = ['', 'about', 'gigs', 'contact'];

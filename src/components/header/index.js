@@ -10,22 +10,20 @@ const upperFirstSpacedWords = flow(words, map(upperFirst), join(' '));
 export default class Header extends Component {
   links = mapWithIndex(
     (slug, index) => (
-      <Link key={`${index}${slug}`}
+      <Link key={index + slug}
         activeClassName={style.active}
         children={slug === '' ? 'Home' : upperFirstSpacedWords(slug)}
-        href={`/${slug}`}
+        href={'/' + slug}
       />
     ),
     this.props.slugs
   );
 
-  children = []
-
-  render() {
+  render({ title }) {
     return (
       <header class={style.header}>
         <div class={style.logo}>
-          <h1 class="sr-only">A Night In November</h1>
+          <h1 class="sr-only">{title}</h1>
           <img src="assets/logo.png" />
         </div>
         <nav>
@@ -37,7 +35,8 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  slugs: PropTypes.arrayOf(PropTypes.string)
+  slugs: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string
 };
 
 Header.defaultProps = {

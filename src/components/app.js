@@ -28,7 +28,7 @@ export default class App extends Component {
   render() {
     return (
       <div id="app">
-        <Header slugs={this.slugs} />
+        <Header slugs={this.slugs} title="A Night In November" />
         <Router onChange={this.handleRoute}>
           <Home path="/" />
           <About path="/about" />

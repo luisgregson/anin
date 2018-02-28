@@ -19,10 +19,15 @@ export default class Header extends Component {
     this.props.slugs
   );
 
+  children = []
+
   render() {
     return (
       <header class={style.header}>
-        <h1>A Night In November</h1>
+        <div class={style.logo}>
+          <h1 class="sr-only">A Night In November</h1>
+          <img src="assets/logo.png" />
+        </div>
         <nav>
           {this.links}
         </nav>

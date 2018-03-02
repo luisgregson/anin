@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly 1`] = `
+<header
+  class="header"
+>
+  <div
+    class="logo"
+  >
+    <h1
+      class="sr-only"
+    >
+      Test page
+    </h1>
+    <img
+      src="assets/logo.png"
+    />
+  </div>
+  <nav>
+    <a
+      class="active"
+      href="/"
+      onClick={[Function]}
+    >
+      Home
+    </a>
+    <a
+      class=""
+      href="/another-page"
+      onClick={[Function]}
+    >
+      Another Page
+    </a>
+  </nav>
+</header>
+`;
